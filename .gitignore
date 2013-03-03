@@ -4,3 +4,5 @@ bin
 Thumbs.db
 *.class
 *.DS_Store
+local.properties
+gen

@@ -54,16 +54,12 @@ class ClickableButtonListAdapter extends SimpleAdapter {
         ViewHolder holder = (ViewHolder) view.getTag();
         if(holder == null) {
             holder = new ViewHolder();
-            holder.text = (TextView) view.findViewById(R.id.comments);
             holder.image = (ImageView) view.findViewById(R.id.arrow);
-            view.setTag(holder);
-            holder.text.setOnClickListener(listener);
             holder.image.setOnClickListener(listener);
+            view.setTag(holder);
         }
         final HashMap<String, String> article = (HashMap<String, String>) getItem(position);
-        Log.w("HNewsDroid", article.toString());
         String commentsUrl = article.get("comments");
-        holder.text.setTag(commentsUrl);
         holder.image.setTag(commentsUrl);
         return view;
     }

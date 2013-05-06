@@ -1,7 +1,7 @@
 package com.salquestfl.hnewsreader;
 
 import java.io.IOException;
-import java.net.URL;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,13 +28,13 @@ public class RssReader extends DefaultHandler {
     private HashMap<String, String> rssItem = new HashMap<String, String>();
     private StringBuilder chars;
 
-    public static ArrayList<HashMap<String, String>> read(URL url) throws SAXException, IOException {
+    public static ArrayList<HashMap<String, String>> read(Reader ir) throws SAXException, IOException {
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser parser = factory.newSAXParser();
             XMLReader reader = parser.getXMLReader();
             RssReader handler = new RssReader();
-            InputSource input = new InputSource(url.openStream());
+            InputSource input = new InputSource(ir);
             reader.setContentHandler(handler);
             reader.parse(input);
             

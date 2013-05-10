@@ -62,7 +62,6 @@ public class RssReader extends DefaultHandler {
             // Check if looking for article, and if article is complete
             if (field.equals("entry") || field.equals("item")) {
                 rssItems.add(rssItem);
-                Log.w("HNewsDroid", "adding " + rssItem.toString());
                 rssItem = new HashMap<String, String>();
             }
             else {

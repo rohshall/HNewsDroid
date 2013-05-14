@@ -79,7 +79,7 @@ public class ClickableButtonListAdapter extends BaseAdapter {
         final HashMap<String, String> article = (HashMap<String, String>) getItem(position);
         String title = article.get("title");
         holder.titleText.setText(title);
-        String url = article.get("description");
+        String url = article.get("link");
         holder.urlText.setText(url);
         String commentsUrl = article.get("comments");
         holder.commentsImage.setTag(commentsUrl);

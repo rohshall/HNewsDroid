@@ -42,7 +42,7 @@ class RssFeedTask extends AsyncTask<String, Void, ArrayList<HashMap<String, Stri
             URL url = new URL(urls[0]);
             conn = (HttpURLConnection) url.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-            return RssReader.read(in);
+            return new RssReader().read(in);
         } catch (Exception e) {
             Log.w(TAG, e.toString());
             return null;

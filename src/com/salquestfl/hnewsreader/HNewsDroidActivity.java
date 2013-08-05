@@ -10,6 +10,7 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ListView;
@@ -29,9 +30,21 @@ class RssFeedTask extends AsyncTask<String, Void, ArrayList<HashMap<String, Stri
 
     private static final String TAG = "HNewsDroid";
     private Activity activity;
+    private ProgressDialog progressDialog;
 
     public RssFeedTask(Activity activity) {
         this.activity = activity;
+    }
+
+   @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+      progressDialog = new ProgressDialog(activity);
+      progressDialog.setCancelable(false);
+      progressDialog.setMessage("Downloading articles, please wait...");
+      progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+      progressDialog.setProgress(0);
+      progressDialog.show();
     }
 
     // This executes in non-UI thread. No UI calls from here (including Toast)
@@ -57,6 +70,8 @@ class RssFeedTask extends AsyncTask<String, Void, ArrayList<HashMap<String, Stri
     // This executes in UI thread
     @Override
     protected void onPostExecute(final ArrayList<HashMap<String, String>> articles) {
+        super.onPostExecute(articles);
+        progressDialog.dismiss();
         if (articles == null) {
             String msg = "Could not connect to the server. Please try again after some time.";
             Log.w(TAG, msg);
